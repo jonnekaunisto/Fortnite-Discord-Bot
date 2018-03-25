@@ -47,5 +47,5 @@ bot.on("message", function (msg) {
 
 // Login (replace these auth details with your bot's)
 
-bot.login(process.env.BOT_TOKEN);
+bot.login('NDI3MjI0NzU2ODE5ODUzMzIz.DZhkeQ.I30e6oT3ab-iOXgpejNd_aDBZFk');
 
