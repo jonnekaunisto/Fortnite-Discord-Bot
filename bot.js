@@ -32,7 +32,7 @@ bot.on("message", function (msg) {
 	
 	if(wordsA[0].toLowerCase().indexOf("!word") === 0 && wordsA.length >= 2 && msg.author.username != bot.username){
 		word = msg.content.substring(wordsA[0].length, msg.content.length);
-		msg.channel.sendMessage("Word changed to " + word + " by " + msg.author.username);
+		msg.channel.sendMessage("Word changed to " + word + " by test " + msg.author.username);
 		console.log("Word changed to " + word + " by " + msg.author.username);
 	}
 	
