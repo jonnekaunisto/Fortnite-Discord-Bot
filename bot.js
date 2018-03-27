@@ -7,10 +7,11 @@ var request = require('request');
 var bot = new Discord.Client();
 var triggerWord = "oooga";
 var word = "booga";
+
 /*
  var options = {
     method: "GET",
-    url: 'https://api.fortnitetracker.com/v1/profile/pc/jonzezzz',
+    url: 'https://api.fortnitetracker.com/v1/profile/pc/' + player,
     headers: {
       'User-Agent': 'nodejs request',
       'TRN-Api-Key' :"b8725b06-0df4-4302-8d4c-dda2ac2814ab"
@@ -18,6 +19,7 @@ var word = "booga";
  }
  */
  
+ /*
  var options = {
     method: "GET",
     url: 'https://fortnite.y3n.co/v2/player/jonzezzz',
@@ -26,22 +28,31 @@ var word = "booga";
       'X-Key' :"gBlzQGZb6gHgNVfWlLVG"
     }
  }
+ */
  
- function printFortNiteStats(message){
+ function printFortNiteStats(message, player){
 	var result = "";
+	var options = {
+		method: "GET",
+		url: 'https://fortnite.y3n.co/v2/player/' + player,
+		headers: {
+		  'User-Agent': 'nodejs request',
+		  'X-Key' :"gBlzQGZb6gHgNVfWlLVG"
+		}
+	}
+ 
 	request(options, (error, response, body) => {
-		console.log('yay');
-		//console.log(error);
-
-		console.log('plz print');
-		var stats = JSON.parse(body);
-		//console.log(stats);
-		var obj = `${stats.br.profile.level}`;
-		
-		var str = JSON.stringify(obj);
-		console.log("string thingy " + str);
-		result = str;
-		message.channel.sendMessage(str);
+		if(error != 'null' && response.statusCode == 200){
+			console.log('plz print');
+			var stats = JSON.parse(body);
+			//console.log(stats);
+			//var obj = `${stats.br.profile.level}`;
+			var obj = stats.br.profile.level;
+			var str = JSON.stringify(obj);
+			console.log("string thingy " + str);
+			result = str;
+			message.channel.sendMessage('```Level is: '+str+'```');
+		}
 	});
 	return result;
 	
@@ -108,8 +119,8 @@ bot.on("message", function (msg) {
         console.log("ping-ed " + msg.author.username);
     }
 	
-	if(wordsA[0].toLowerCase().indexOf('find') === 0){
-		var rank = printFortNiteStats(msg);
+	if(wordsA[0].toLowerCase().indexOf('!stats') === 0){
+		var rank = printFortNiteStats(msg, wordsA[1]);
 		//console.log(rank);
 		//msg.channel.sendMessage(rank);
 	}
@@ -119,6 +130,8 @@ bot.on("message", function (msg) {
 
 //bot.login(process.env.BOT_TOKEN);
 bot.login('NDI3MjI0NzU2ODE5ODUzMzIz.DZhkeQ.I30e6oT3ab-iOXgpejNd_aDBZFk');//mine
+
+
 
 
 
