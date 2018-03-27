@@ -50,7 +50,7 @@ bot.on("message", function (msg) {
 	
 	if(wordsA[0].content.toLowerCase().indexOf('find') === 0){
 		ow.player('jonzezzz-1479').then(player =>{
-			console.log(player);
+			msg.channel.sendMessage(player);
 		}
 	}
 });
