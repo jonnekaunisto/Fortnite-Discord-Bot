@@ -1,9 +1,13 @@
+import oversmash from 'oversmash'
+const ow = oversmash();
 var Discord = require("discord.js");
 
 // Create a client
 var bot = new Discord.Client();
 var triggerWord = "oooga";
 var word = "booga"
+
+
 
 // This code will run once the bot has started up.
 bot.on("ready", function () {
@@ -36,13 +40,19 @@ bot.on("message", function (msg) {
 		console.log("Word changed to " + word + " by " + msg.author.username);
 	}
 	
-    if (msg.content.toLowerCase().indexOf(triggerWord) === 0 && msg.author.username != bot.username) {
+    if (wordsA[0]content.toLowerCase().indexOf(triggerWord) === 0 && msg.author.username != bot.username) {
         // send a message to the channel the ping message was sent in.
         msg.channel.sendMessage(word);
 		
         // alert the console
         console.log("ping-ed " + msg.author.username);
     }
+	
+	if(wordsA[0].content.toLowerCase().indexOf('find') === 0){
+		ow.player('jonzezzz-1479').then(player =>{
+			console.log(player);
+		}
+	}
 });
 
 // Login (replace these auth details with your bot's)
