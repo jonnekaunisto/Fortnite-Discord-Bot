@@ -1,4 +1,4 @@
-var OverwatchAPI = require('./overwatch.js');
+
 var Discord = require("discord.js");
 var request = require('request');
 
@@ -18,7 +18,7 @@ var word = "booga";
     }
  }
  */
- 
+
  /*
  var options = {
     method: "GET",
@@ -29,9 +29,9 @@ var word = "booga";
     }
  }
  */
- 
+
  function printFortNiteStats(message, player){
-	var result = "";
+	var result = "```";
 	var options = {
 		method: "GET",
 		url: 'https://fortnite.y3n.co/v2/player/' + player,
@@ -40,7 +40,7 @@ var word = "booga";
 		  'X-Key' :"gBlzQGZb6gHgNVfWlLVG"
 		}
 	}
- 
+
 	request(options, (error, response, body) => {
 		if(error != 'null' && response.statusCode == 200){
 			console.log('plz print');
@@ -48,16 +48,33 @@ var word = "booga";
 			//console.log(stats);
 			//var obj = `${stats.br.profile.level}`;
 			var obj = stats.br.profile.level;
+
 			var str = JSON.stringify(obj);
 			console.log("string thingy " + str);
-			result = str;
-			message.channel.sendMessage('```Level is: '+str+'```');
+			result += "Level is: " + str + '\n';
+      var kills = stats.br.stats.pc.all.kills;
+      str= JSON.stringify(kills);
+      result+="Total Kills: "+ str + '\n';
+      var matchesplayed =stats.br.stats.pc.all.matchesPlayed;
+      str=JSON.stringify(matchesplayed);
+      result+="Matches Played: " + str + '\n';
+      var $scoreTest= ('#score');
+      var score = stats.br.stats.pc.all.$scoreTest;
+      str=JSON.stringify(score);
+      result+="Score "+str + '\n';
+
+
+
+
+      result += "```";
+      console.log(result);
+			message.channel.sendMessage(result);
 		}
 	});
 	return result;
-	
+
 }
- 
+
 
 function printFortNiteStats1(message){
 	var result = "";
@@ -75,7 +92,7 @@ function printFortNiteStats1(message){
 		result = str;
 		message.channel.sendMessage(str);
 	});
-	
+
 }
 
 
@@ -90,7 +107,7 @@ bot.on("ready", function () {
 bot.on("disconnected", function () {
     // alert the console
     console.log("Disconnected!");
-	
+
     // exit node.js with an error
     process.exit(1);
 });
@@ -104,23 +121,24 @@ bot.on("message", function (msg) {
 		msg.channel.sendMessage("Trigger changed to " + triggerWord + " by " + msg.author.username);
 		console.log("Trigger changed to " + triggerWord + " by " + msg.author.username);
 	}
-	
+
 	if(wordsA[0].toLowerCase().indexOf("!word") === 0 && wordsA.length >= 2){
 		word = msg.content.substring(wordsA[0].length, msg.content.length);
 		msg.channel.sendMessage("Word changed to " + word + " by test " + msg.author.username);
 		console.log("Word changed to " + word + " by " + msg.author.username);
 	}
-	
+
     if (wordsA[0].toLowerCase().indexOf(triggerWord) === 0) {
         // send a message to the channel the ping message was sent in.
         msg.channel.sendMessage(word);
-		
+
         // alert the console
         console.log("ping-ed " + msg.author.username);
     }
-	
+
 	if(wordsA[0].toLowerCase().indexOf('!stats') === 0){
 		var rank = printFortNiteStats(msg, wordsA[1]);
+
 		//console.log(rank);
 		//msg.channel.sendMessage(rank);
 	}
@@ -130,8 +148,3 @@ bot.on("message", function (msg) {
 
 //bot.login(process.env.BOT_TOKEN);
 bot.login('NDI3MjI0NzU2ODE5ODUzMzIz.DZhkeQ.I30e6oT3ab-iOXgpejNd_aDBZFk');//mine
-
-
-
-
-
