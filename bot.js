@@ -57,8 +57,7 @@ var fortniteAPIKey = process.env.FORTNITE_KEY;
       var matchesplayed =stats.br.stats.pc.all.matchesPlayed;
       str=JSON.stringify(matchesplayed);
       result+="Matches Played: " + str + '\n';
-      var $scoreTest= ('#score');
-      var score = stats.br.stats.pc.all.$scoreTest;
+      var score = stats.br.stats.pc.all.score;
       str=JSON.stringify(score);
       result+="Score "+str + '\n';
 
@@ -73,28 +72,6 @@ var fortniteAPIKey = process.env.FORTNITE_KEY;
 	return result;
 
 }
-
-
-function printFortNiteStats1(message){
-	var result = "";
-	request(options, (error, response, body) => {
-		console.log('yay');
-		console.log(error);
-
-		console.log('plz print');
-		var stats = JSON.parse(body);
-		//console.log(stats);
-		console.log(`${stats.accountId}`);
-		var obj = `${stats.accountId}`;
-		var str = JSON.stringify(obj);
-		console.log("string thingy " + str);
-		result = str;
-		message.channel.sendMessage(str);
-	});
-
-}
-
-
 
 // This code will run once the bot has started up.
 bot.on("ready", function () {
@@ -137,9 +114,6 @@ bot.on("message", function (msg) {
 
 	if(wordsA[0].toLowerCase().indexOf('!stats') === 0){
 		var rank = printFortNiteStats(msg, wordsA[1]);
-
-		//console.log(rank);
-		//msg.channel.sendMessage(rank);
 	}
 });
 
