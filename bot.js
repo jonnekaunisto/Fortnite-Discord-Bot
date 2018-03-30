@@ -1,12 +1,11 @@
-
 var Discord = require("discord.js");
 var request = require('request');
 
-//const ow = oversmash();
 // Create a client
 var bot = new Discord.Client();
-var triggerWord = "oooga";
-var word = "booga";
+var triggerWord = "hi";
+var word = "Hi!";
+var fortniteAPIKey = process.env.FORTNITE_KEY;
 
 /*
  var options = {
@@ -14,7 +13,7 @@ var word = "booga";
     url: 'https://api.fortnitetracker.com/v1/profile/pc/' + player,
     headers: {
       'User-Agent': 'nodejs request',
-      'TRN-Api-Key' :"b8725b06-0df4-4302-8d4c-dda2ac2814ab"
+      'TRN-Api-Key' :""
     }
  }
  */
@@ -25,7 +24,7 @@ var word = "booga";
     url: 'https://fortnite.y3n.co/v2/player/jonzezzz',
     headers: {
       'User-Agent': 'nodejs request',
-      'X-Key' :"gBlzQGZb6gHgNVfWlLVG"
+      'X-Key' :""
     }
  }
  */
@@ -37,7 +36,7 @@ var word = "booga";
 		url: 'https://fortnite.y3n.co/v2/player/' + player,
 		headers: {
 		  'User-Agent': 'nodejs request',
-		  'X-Key' :"gBlzQGZb6gHgNVfWlLVG"
+		  'X-Key' : fortniteAPIKey
 		}
 	}
 
@@ -146,5 +145,5 @@ bot.on("message", function (msg) {
 
 // Login (replace these auth details with your bot's)
 
-//bot.login(process.env.BOT_TOKEN);
-bot.login('NDI3MjI0NzU2ODE5ODUzMzIz.DZhkeQ.I30e6oT3ab-iOXgpejNd_aDBZFk');//mine
+bot.login(process.env.BOT_TOKEN);
+
