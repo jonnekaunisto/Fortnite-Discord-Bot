@@ -6,6 +6,13 @@ var bot = new Discord.Client();
 var triggerWord = "hi";
 var word = "Hi!";
 var fortniteAPIKey = process.env.FORTNITE_KEY;
+var dict = {};
+var japaneseCharacters = "卂乃匚刀乇下厶卄工丁长乚从𠘨口尸㔿尺丂丅凵リ山乂丫乙 ";
+var alphabet = "abcdefghijklmnopqrstuvwxyz ";
+
+for(int i = 0; i < alphabet.length(); i++){
+	dict[alphabet.charAt(i)] = japaneseCharacters.charAt(i);
+}
 
 /*
  var options = {
@@ -114,6 +121,15 @@ bot.on("message", function (msg) {
 
 	if(wordsA[0].toLowerCase().indexOf('!stats') === 0){
 		var rank = printFortNiteStats(msg, wordsA[1]);
+	}
+	
+	if(wordsA[0].toLowerCase().indexOf('!jap') === 0){
+		var word = msg.content.substring(3, msg.content.length());
+		var result = "";
+		for(int i = 0; i < word.length(); i++){
+			result = dict[word.charAt(i)];
+		}
+		msg.channel.sendMessage(result)
 	}
 });
 
