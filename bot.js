@@ -6,11 +6,12 @@ var bot = new Discord.Client();
 var triggerWord = "hi";
 var word = "Hi!";
 var fortniteAPIKey = process.env.FORTNITE_KEY;
+
 var dict = {};
 var japaneseCharacters = "卂乃匚刀乇下厶卄工丁长乚从𠘨口尸㔿尺丂丅凵リ山乂丫乙 ";
 var alphabet = "abcdefghijklmnopqrstuvwxyz ";
 
-for(int i = 0; i < alphabet.length(); i++){
+for(i = 0; i < alphabet.length; i++){
 	dict[alphabet.charAt(i)] = japaneseCharacters.charAt(i);
 }
 
@@ -124,16 +125,22 @@ bot.on("message", function (msg) {
 	}
 	
 	if(wordsA[0].toLowerCase().indexOf('!jap') === 0){
-		var word = msg.content.substring(3, msg.content.length());
+		var word = msg.content.substring(5, msg.content.length);
 		var result = "";
-		for(int i = 0; i < word.length(); i++){
-			result = dict[word.charAt(i)];
+		console.log("");
+		console.log(word);
+		for(i = 0; i < word.length; i++){
+			console.log(result);
+			result += dict[word.charAt(i)];
+			console.log("________________");
 		}
-		msg.channel.sendMessage(result)
+		console.log(result);
+		msg.channel.sendMessage(result);
 	}
 });
 
 // Login (replace these auth details with your bot's)
 
 bot.login(process.env.BOT_TOKEN);
+
 
